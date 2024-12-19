@@ -1,0 +1,89 @@
+﻿@model BpkbMvc.Models.TrBpkb
+
+<h1>Create Data BPKB</h1>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label for="AgreementNumber">Agreement Number</label>
+        <input asp-for="AgreementNumber" class="form-control" />
+        <span asp-validation-for="AgreementNumber" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="BpkbNo">BPKB No</label>
+        <input asp-for="BpkbNo" class="form-control" />
+        <span asp-validation-for="BpkbNo" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="BranchId">Branch ID</label>
+        <input asp-for="BranchId" class="form-control" />
+        <span asp-validation-for="BranchId" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="BpkbDate">BPKB Date</label>
+        <input asp-for="BpkbDate" class="form-control" type="date" />
+        <span asp-validation-for="BpkbDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="FakturNo">Faktur No</label>
+        <input asp-for="FakturNo" class="form-control" />
+        <span asp-validation-for="FakturNo" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="FakturDate">Faktur Date</label>
+        <input asp-for="FakturDate" class="form-control" type="date" />
+        <span asp-validation-for="FakturDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="LocationId">Location</label>
+        <select asp-for="LocationId" class="form-control">
+            <option value="">-- Select Location --</option>
+            @if (ViewBag.StorageLocations != null && ((List<BpkbMvc.Models.MsStorageLocation>)ViewBag.StorageLocations).Count > 0)
+            {
+                foreach (var location in (List<BpkbMvc.Models.MsStorageLocation>)ViewBag.StorageLocations)
+                {
+                    <option value="@location.LocationId">@location.LocationName</option>
+                }
+            }
+            else
+            {
+                <option value="">No Locations Available</option>
+            }
+        </select>
+        <span asp-validation-for="LocationId" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="PoliceNo">Police No</label>
+        <input asp-for="PoliceNo" class="form-control" />
+        <span asp-validation-for="PoliceNo" class="text-danger"></span>
+    </div>
+    <div>
+        <label for="BpkbDateIn">BPKB Date In</label>
+        <input asp-for="BpkbDateIn" class="form-control" type="date" />
+        <span asp-validation-for="BpkbDateIn" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="CreatedBy">Created By</label>
+        <input asp-for="CreatedBy" class="form-control" value="@ViewBag.CreatedBy" readonly />
+    </div>
+
+    <!-- LastUpdatedBy field (diisi otomatis dengan username) -->
+    <div>
+        <label for="LastUpdatedBy">Last Updated By</label>
+        <input asp-for="LastUpdatedBy" class="form-control" value="@ViewBag.LastUpdatedBy" readonly />
+    </div>
+
+    <!-- CreatedOn field (dihandle otomatis) -->
+    <div>
+        <label for="CreatedOn">Created On</label>
+        <input asp-for="CreatedOn" class="form-control" value="@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")" readonly />
+    </div>
+
+    <!-- LastUpdatedOn field (dihandle otomatis) -->
+    <div>
+        <label for="LastUpdatedOn">Last Updated On</label>
+        <input asp-for="LastUpdatedOn" class="form-control" value="@DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss")" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
